@@ -8,6 +8,5 @@
 
 #board {
   background-color: orange;
-  margin-right: auto;
-  margin-left: auto;
+  position: absolute;
 }

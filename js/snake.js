@@ -8,6 +8,12 @@ var boardDiv = []
 
 var blockSize = 30;
 
+var snake = {
+    direction: ""
+    row: 10,
+    column: 10,
+};
+
 init();
 
 /* functions*/
@@ -15,10 +21,37 @@ init();
 function init()
 {
     createBoardDivs();
+    renderAll();
+
+    window.onkeydown = keyFunction;
 }
 
-function createBoardDivs()
-{
+function renderAll() {
+ boardDiv[snake.row][snake.column].style.backgroundColor = "coral";
+}
+
+function keyFunction() {
+    boardDiv[snake.row][snake.column].style.backgroundColor = "transparent";
+
+    switch (event.key) {
+      case "ArrowUp":
+        snake.row--;
+        break;
+      case "ArrowDown":
+        snake.row++;
+        break;
+      case "ArrowRight":
+        snake.column++;
+        break;
+      case "ArrowLeft":
+        snake.column--;
+        break;
+    }
+    console.log("Your Snake is at ( " + snake.row + ", " + snake.column + ") ");
+    renderAll();
+}
+function createBoardDivs() {
+
   /* this function is used to calculate the width and height based on the # of rows & columns*/
   board.style.width = blockSize * totalColumns + "px";
   board.style.height = blockSize * totalRows + "px";
@@ -42,7 +75,7 @@ function createBoardDivs()
         boardDiv[row][column].style.height = blockSize + "px";
 
         boardDiv[row][column].style.border = "1px solid black";
-        boardDiv[row][column].style.boxSizing = "border-box"
+        boardDiv[row][column].style.boxSizing = "border-box";
     }
 
   }

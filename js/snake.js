@@ -9,10 +9,12 @@ var boardDiv = []
 var blockSize = 30;
 
 var snake = {
-    direction: ""
+    direction: "",
     row: 10,
     column: 10,
 };
+
+var snakeTimer = false;
 
 init();
 
@@ -30,26 +32,61 @@ function renderAll() {
  boardDiv[snake.row][snake.column].style.backgroundColor = "coral";
 }
 
-function keyFunction() {
+function moveSnake() {
     boardDiv[snake.row][snake.column].style.backgroundColor = "transparent";
+    
+    switch(snake.direction) {
+        case "UP":
+          snake.row--;
+          break;
+        case "DOWN":
+          snake.row++;
+          break;
+        case "RIGHT":
+          snake.column++;
+          break;
+        case "LEFT":
+          snake.column--;
+          break;
+    }
+}
 
+function keyFunction() {
     switch (event.key) {
       case "ArrowUp":
-        snake.row--;
+        snake.direction = "UP";
         break;
       case "ArrowDown":
-        snake.row++;
+        snake.direction = "DOWN";
         break;
       case "ArrowRight":
-        snake.column++;
+        snake.direction = "RIGHT";
         break;
       case "ArrowLeft":
-        snake.column--;
+        snake.direction = "LEFT";
         break;
     }
     console.log("Your Snake is at ( " + snake.row + ", " + snake.column + ") ");
+}
+
+function startSnakeTimer() 
+{
+    stopSnakeTimer();
+    snakeTimer = setInterval(tickSnakeTimer, 100);
+}
+
+function stopSnakeTimer() {
+    if (snakeTimer) {
+        clearInterval(snakeTimer);
+        snakeTimer = false;
+    }
+}
+
+function tickSnakeTimer() {
+    moveSnake();
     renderAll();
 }
+
 function createBoardDivs() {
 
   /* this function is used to calculate the width and height based on the # of rows & columns*/

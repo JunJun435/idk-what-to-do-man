@@ -1,10 +1,10 @@
-var snakeboard = document.getElementById("snakeboard");
+var board = document.getElementById("board");
 var header = document.getElementById("header");
 
 var totalRows = 17;
-var totalRows = 17;
+var totalColumns = 17;
 
-var stageDivider = []
+var boardDiv = []
 
 var blockSize = 30;
 
@@ -12,10 +12,12 @@ var blockSize = 30;
 
 function init()
 {
-    createStageDividers();
+    createBoardDivs();
 }
 
-function createStageDividers()
+function createBoardDivs()
 {
+  board.style.width = blockSize * totalColumns + "px";
+  board.style.height = bloackSize * totalRows + "px";
 
 }

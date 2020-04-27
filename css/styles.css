@@ -1,1 +1,13 @@
+#header {
+  text-align: center;
+  font-family: Comic Sans MS;
+  font-size: 25 px;
+  font-weight: bold;
+  color: orange;
+}
 
+#board {
+  background-color: orange;
+  margin-right: auto;
+  margin-left: auto;
+}

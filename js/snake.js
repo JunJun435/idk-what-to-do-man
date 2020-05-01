@@ -75,7 +75,8 @@ function keyFunction() {
 }
 
 function collisionChecker() {
-    if ((snake.row == 0)) {
+    if ((snake.row == 0) || (snake.row == totalRows - 1) || 
+        (snake.column == 0) || (snake.column == totalColumns - 1)) {
       gameOver();
     }
 }
@@ -98,9 +99,11 @@ function stopSnakeTimer() {
 }
 
 function tickSnakeTimer() {
+  if (!gameOverFlag) {
     moveSnake();
     collisionChecker();
     renderAll();
+  }
 }
 
 function createBoardDivs() {

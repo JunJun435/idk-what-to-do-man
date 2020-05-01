@@ -12,8 +12,8 @@ var snake = {
     direction: "",
     row: 9,
     column: 9,
-    snakeBody: [],
-    snakeLength: 0,
+    body: [],
+    length: 0,
 };
 
 var snakeFood = {
@@ -40,15 +40,26 @@ function init()
 }
 
 function renderAll() {
- boardDiv[snakeFood.row][snakeFood.column].style.backgroundColor = "green"; 
- boardDiv[snake.row][snake.column].style.backgroundColor = "coral";
- header.innerHTML = "Random Asian's Snake Game | Score : " + snake.snakeLength;
+  boardDiv[snakeFood.row][snakeFood.column].style.backgroundColor = "green"; 
+  boardDiv[snake.row][snake.column].style.backgroundColor = "coral";
+  for (var i = 0; i < snake.body.length; i++) {
+       var segment = snake.body[i];
+        boardDiv[segment.row][segment.column].style.backgroundColor = "tomato";
+
+ }
+ header.innerHTML = "Random Asian's Snake Game | Score : " + snake.length;
 }
 
 function moveSnake() {
     boardDiv[snake.row][snake.column].style.backgroundColor = "transparent";
-    snake.snakeBody.unshift({row:snake.row, column:snake.column});
-    console.log(snake.snakeBody);
+    for (var i = 0; i < snake.body.length; i++) {
+         var segment = snake.body[i];
+         boardDiv[segment.row][segment.column].style.backgroundColor = "transparent";
+    }
+
+    snake.body.unshift({row:snake.row, column:snake.column});
+    snake.body.length = snake.length;
+    console.log(snake.body);
     
     switch(snake.direction) {
         case "UP":
@@ -93,7 +104,7 @@ function collisionChecker() {
 
     if ((snake.row == snakeFood.row) && (snake.column == snakeFood.column)) {
         console.log ("Your snake ate an apple... YUMMY!!");
-        snake.snakeLength++;
+        snake.length++;
         moveSnakeFood(); 
     }
 }

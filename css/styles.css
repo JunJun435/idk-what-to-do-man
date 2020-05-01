@@ -1,5 +1,5 @@
 #header {
-  text-align: center;
+  text-align: match-parent;
   font-family: Comic Sans MS;
   font-size: 25 px;
   font-weight: bold;
@@ -7,6 +7,13 @@
 }
 
 #board {
-  background-color: orange;
   position: absolute;
+}
+
+body {
+  background-image: url("../images/sunset.jpg");
+}
+
+h3 {
+  text-align: center;
 }

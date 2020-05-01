@@ -16,6 +16,8 @@ var snake = {
 
 var snakeTimer = false;
 
+var gameOverFlag = false;
+
 init();
 
 /* functions*/
@@ -51,6 +53,7 @@ function moveSnake() {
           snake.column--;
           break;
     }
+    //tickSnakeTimer();
 }
 
 function keyFunction() {
@@ -71,8 +74,18 @@ function keyFunction() {
     console.log("Your Snake is at ( " + snake.row + ", " + snake.column + ") ");
 }
 
-function startSnakeTimer() 
-{
+function collisionChecker() {
+    if ((snake.row == 0)) {
+      gameOver();
+    }
+}
+
+function gameOver() {
+  console.log("HAHA LOSER!");
+  gameOverFlag = true;
+  stopSnakeTimer();
+}
+function startSnakeTimer() {
     stopSnakeTimer();
     snakeTimer = setInterval(tickSnakeTimer, 100);
 }
@@ -86,6 +99,7 @@ function stopSnakeTimer() {
 
 function tickSnakeTimer() {
     moveSnake();
+    collisionChecker();
     renderAll();
 }
 

@@ -12,6 +12,13 @@ var snake = {
     direction: "",
     row: 9,
     column: 9,
+    snakeBody: [],
+    snakeLength: 0,
+};
+
+var snakeFood = {
+    row: 4,
+    column: 9,
 };
 
 var snakeTimer = false;
@@ -33,11 +40,15 @@ function init()
 }
 
 function renderAll() {
+ boardDiv[snakeFood.row][snakeFood.column].style.backgroundColor = "green"; 
  boardDiv[snake.row][snake.column].style.backgroundColor = "coral";
+ header.innerHTML = "Random Asian's Snake Game | Score : " + snake.snakeLength;
 }
 
 function moveSnake() {
     boardDiv[snake.row][snake.column].style.backgroundColor = "transparent";
+    snake.snakeBody.unshift({row:snake.row, column:snake.column});
+    console.log(snake.snakeBody);
     
     switch(snake.direction) {
         case "UP":
@@ -53,7 +64,7 @@ function moveSnake() {
           snake.column--;
           break;
     }
-    //tickSnakeTimer();
+    
 }
 
 function keyFunction() {
@@ -79,8 +90,18 @@ function collisionChecker() {
         (snake.column == 0) || (snake.column == totalColumns - 1)) {
       gameOver();
     }
+
+    if ((snake.row == snakeFood.row) && (snake.column == snakeFood.column)) {
+        console.log ("Your snake ate an apple... YUMMY!!");
+        snake.snakeLength++;
+        moveSnakeFood(); 
+    }
 }
 
+function moveSnakeFood() {
+  snakeFood.row = getRndInteger(1, totalRows - 2); 
+  snakeFood.column = getRndInteger(1, totalColumns - 2);
+}
 function gameOver() {
   console.log("HAHA LOSER!");
   gameOverFlag = true;
@@ -135,4 +156,7 @@ function createBoardDivs() {
     }
 
   }
+}
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

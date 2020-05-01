@@ -10,8 +10,8 @@ var blockSize = 30;
 
 var snake = {
     direction: "",
-    row: 10,
-    column: 10,
+    row: 9,
+    column: 9,
 };
 
 var snakeTimer = false;
@@ -26,6 +26,8 @@ function init()
     renderAll();
 
     window.onkeydown = keyFunction;
+
+    startSnakeTimer();
 }
 
 function renderAll() {

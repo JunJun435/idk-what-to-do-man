@@ -81,16 +81,24 @@ function moveSnake() {
 function keyFunction() {
     switch (event.key) {
       case "ArrowUp":
+        if (snake.direction != "DOWN") {
         snake.direction = "UP";
+        }
         break;
       case "ArrowDown":
+        if (snake.direction != "UP") {
         snake.direction = "DOWN";
+        }
         break;
       case "ArrowRight":
+        if (snake.direction != "LEFT") {
         snake.direction = "RIGHT";
+        }
         break;
       case "ArrowLeft":
+        if (snake.direction != "RIGHT") {
         snake.direction = "LEFT";
+      }
         break;
     }
     console.log("Your Snake is at ( " + snake.row + ", " + snake.column + ") ");

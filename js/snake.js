@@ -125,9 +125,39 @@ function collisionChecker() {
 }
 
 function moveSnakeFood() {
-  snakeFood.row = getRndInteger(1, totalRows - 2); 
-  snakeFood.column = getRndInteger(1, totalColumns - 2);
+  var emptyBlocks = [];
+
+  for (var row = 1; row < totalRows-1; row++) {
+      for (var column = 1; column < totalColumns-1; column++) {
+        var snakeHeadFlag = false;
+        var snakeBodyFlag = false;
+
+        if ((row == snake.row) && (column == snake.column)) {
+            snakeHeadFlag = true;
+        } 
+        
+        else {
+          for (var i = 0; i < snake.body.length; i++) {
+              var segment = snake.body[i];
+              if ((row == segment.row) && (column == snake.column)) {
+                snakeBodyFlag = true;
+                break;
+              }
+          }
+        }
+
+        if (!snakeHeadFlag && !snakeBodyFlag) {
+          emptyBlocks.push( { row:row, column:column} ); 
+        }
+      }
+  }
+
+  var index = getRndInteger(0, emptyBlocks.length-1);
+  
+  snakeFood.row = emptyBlocks[index].row;
+  snakeFood.column = emptyBlocks[index].column;
 }
+
 function gameOver() {
   console.log("HAHA LOSER!");
   gameOverFlag = true;

@@ -102,6 +102,13 @@ function collisionChecker() {
       gameOver();
     }
 
+    for (var i = 0; i < snake.body.length; i++) {
+        var segment = snake.body[i];
+        if ((snake.row == segment.row) && (snake.column == segment.column)) {
+        gameOver();
+        return;
+      }
+    }
     if ((snake.row == snakeFood.row) && (snake.column == snakeFood.column)) {
         console.log ("Your snake ate an apple... YUMMY!!");
         snake.length++;

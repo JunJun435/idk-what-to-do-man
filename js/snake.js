@@ -1,5 +1,8 @@
 var board = document.getElementById("board");
 var header = document.getElementById("header");
+var playAgain = document.getElementById("playAgain");
+
+playAgain.onclick = buttonClicked;
 
 var totalRows = 19;
 var totalColumns = 19;
@@ -21,7 +24,7 @@ var snakeFood = {
     column: 9,
 };
 
-var snakeTimer = false;
+var snakeTimer = true;
 
 var gameOverFlag = false;
 
@@ -32,11 +35,45 @@ init();
 function init()
 {
     createBoardDivs();
+    /* this is to color the outer most blocks on the board so that player knows that if the snake hits it, it's game over. */
+    outerBoardDivs();
     renderAll();
 
     window.onkeydown = keyFunction;
 
     startSnakeTimer();
+}
+
+function buttonClicked() {
+  startSnakeTimer();
+
+    snake.direction = "";
+    snake.row = 9;
+    snake.column = 9;
+    snake.body = [];
+    snake.length = 0;
+
+    snakeFood.row = 4;
+    snakeFood.column = 9;
+
+    outerBoardDivs();
+    renderAll();
+
+    gameOverFlag = false;
+
+}
+
+function outerBoardDivs() {
+    for (var row = 0; row < totalRows; row++) {
+      for (var column = 0; column < totalColumns; column++) {
+
+          if ((row == 0) || (row == totalRows-1) || (column == 0) || (column == totalColumns-1)) {
+              boardDiv[row][column].style.backgroundColor = "yellow";
+          } else {
+              boardDiv[row][column].style.backgroundColor = "transparent";
+          }
+      }
+    }
 }
 
 function renderAll() {
@@ -105,8 +142,7 @@ function keyFunction() {
 }
 
 function collisionChecker() {
-    if ((snake.row == 0) || (snake.row == totalRows - 1) || 
-        (snake.column == 0) || (snake.column == totalColumns - 1)) {
+    if ((snake.row == 0) || (snake.row == totalRows - 1) || (snake.column == 0) || (snake.column == totalColumns - 1)) {
       gameOver();
     }
 
@@ -118,7 +154,7 @@ function collisionChecker() {
       }
     }
     if ((snake.row == snakeFood.row) && (snake.column == snakeFood.column)) {
-        console.log ("Your snake ate an apple... YUMMY!!");
+        console.log ("NOM NOM NOM, your snake ate an apple... YUMMY!!");
         snake.length++;
         moveSnakeFood(); 
     }

@@ -84,7 +84,7 @@ function renderAll() {
         boardDiv[segment.row][segment.column].style.backgroundColor = "tomato";
 
  }
- header.innerHTML = "Random Asian's Snake Game | Score : " + snake.length;
+ header.innerHTML = "Random Weeb's Snake Game | Score : " + snake.length;
 }
 
 function moveSnake() {

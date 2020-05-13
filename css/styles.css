@@ -3,7 +3,7 @@
   font-family: Comic Sans MS;
   font-size: 25 px;
   font-weight: bold;
-  color: orange;
+  color: orangered;
 }
 
 #board {
@@ -13,12 +13,12 @@
   margin-left:auto;
 }
 
-#popup {
+#restart {
   text-align: center;
 }
 
 body {
-  background-image: url("../images/sunset.jpg");
+  background-image: url("../images/galaxia.jpeg");
 }
 
 h3 {
